@@ -1,0 +1,36 @@
+{
+  "name": "swagger-express",
+  "description": "Document your express rest api by jsDoc or yaml.",
+  "version": "1.0.4",
+  "author": "fliptoo <fliptoo.studio@gmail.com>, sposmen <sposmen@gmail.com>",
+  "main": "./index",
+  "dependencies": {
+    "async": "~0.2.7",
+    "body-parser": "^1.18.2",
+    "coffee-script": "*",
+    "doctrine": "*",
+    "express": "^4.15.5",
+    "js-yaml": "~2.1.0",
+    "kml-placemarks-to-geojson": "0.0.0",
+    "logger": "0.0.1",
+    "md5": "^2.2.1",
+    "mongoose": "^4.11.13",
+    "mysql": "^2.15.0",
+    "promise-mysql": "^3.1.0",
+    "pug": "^2.0.0-rc.4",
+    "togeojson": "^0.16.0",
+    "underscore": "*",
+    "validator": "^9.0.0",
+    "xml2js": "^0.4.19"
+  },
+  "devDependencies": {
+    "jshint": "*"
+  },
+  "scripts": {
+    "test": "jshint --config jshint.cfg $(find . -name *.js | grep -v './node_modules')"
+  },
+  "engines": {
+    "node": ">=6.11.4",
+    "npm": ">=5.2.0"
+  }
+}
