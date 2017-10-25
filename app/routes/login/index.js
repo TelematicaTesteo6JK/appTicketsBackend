@@ -36,19 +36,20 @@ const md5 = require('md5');
 
 routes.get('/', function(req, res, next){
 
-    let username = req.query.username;
-    let password = req.query.password; 
+    res.send("it works!");
+    // let username = req.query.username;
+    // let password = req.query.password; 
 
-    Promise.using(mysql(), function(connection) {
-        return connection.query('SELECT id FROM usuarios u INNER JOIN uruarios_roles ur WHERE u.id = ur.usuario AND u.username = "'+username+'" AND u.password = "'+password+'" AND ur.rol = 1').then(function(rows) {  
-            if(Object.keys(rows).length == 1)
-            res.send({status: true, data : rows}).status(200);
-            else
-            res.send({status: false, data : { "mensaje": "No autorizado"}}).status(200);
-        }).catch(function(error) {
-            res.send({status: false, data : error}).status(500);
-        });
-    });
+    // Promise.using(mysql(), function(connection) {
+    //     return connection.query('SELECT id FROM usuarios u INNER JOIN uruarios_roles ur WHERE u.id = ur.usuario AND u.username = "'+username+'" AND u.password = "'+password+'" AND ur.rol = 1').then(function(rows) {  
+    //         if(Object.keys(rows).length == 1)
+    //         res.send({status: true, data : rows}).status(200);
+    //         else
+    //         res.send({status: false, data : { "mensaje": "No autorizado"}}).status(200);
+    //     }).catch(function(error) {
+    //         res.send({status: false, data : error}).status(500);
+    //     });
+    // });
 })
 
 /**

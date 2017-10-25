@@ -16,11 +16,11 @@ app.use(bodyParser.json());
 
 //Conecction to MongoDB Server...
 //mongoose.connect('mongodb://localhost:27017/gestores?authSource=admin', { useMongoClient: true });
-mongoose.connect('mongodb://root:m0ng0@ec2-52-25-124-150.us-west-2.compute.amazonaws.com:27017/gestores?authSource=admin', { useMongoClient: true });
-mongoose.Promise = global.Promise;
-mongoose.connection.on('error', function(err){
-  logger.error(err);
-});
+// mongoose.connect('mongodb://root:m0ng0@ec2-52-25-124-150.us-west-2.compute.amazonaws.com:27017/gestores?authSource=admin', { useMongoClient: true });
+// mongoose.Promise = global.Promise;
+// mongoose.connection.on('error', function(err){
+//   logger.error(err);
+// });
 
 
 //CORS Origin..
@@ -43,14 +43,7 @@ app.use(swagger.init(app, {
   swaggerURL: '/docs',
   swaggerJSON: '/api-docs.json',
   swaggerUI: './public/swagger/',
-  apis: ['./routes/ninjas/index.js', 
-          './routes/estados/index.js',
-          './routes/municipios/index.js', 
-          './routes/origenes/index.js',
-          './routes/eventos/index.js',
-          './routes/codigoPostal/index.js',
-          './routes/encuestas/index.js',
-          './routes/login/index.js']
+  apis: []
 }));
 
 
