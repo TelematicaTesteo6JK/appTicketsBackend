@@ -39,7 +39,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(swagger.init(app, {
   apiVersion: '1.0',
   swaggerVersion: '1.0',
-  basePath: 'http://ec2-52-25-124-150.us-west-2.compute.amazonaws.com:8080',
+  basePath: 'http://localhost:8080',
   swaggerURL: '/docs',
   swaggerJSON: '/api-docs.json',
   swaggerUI: './public/swagger/',

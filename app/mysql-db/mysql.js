@@ -9,13 +9,13 @@ const mysql = require('promise-mysql');
 // });
 
 var pool = mysql.createPool({
-  host            : 'testinggestorelecciones.ct2erbxse8ve.us-west-2.rds.amazonaws.com',
+  host            : 'localhost',
   connectTimeout  : 60 * 1000,
   aquireTimeout   : 60 * 1000,
   timeout         : 60 * 1000,
   user            : 'root',
-  password        : 't3st1ngR00t',
-  database        : 'gestorElecciones',
+  password        : '',
+  database        : 'pi',
   connectionLimit : 10
 });
 
