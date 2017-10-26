@@ -41,7 +41,7 @@ app.use(swagger.init(app, {
   swaggerVersion: '1.0',
   basePath: 'http://localhost:8080',
   swaggerURL: '/docs',
-  swaggerJSON: '/api-docs.json',
+  swaggerJSON: '/bibliohelp-docs.json',
   swaggerUI: './public/swagger/',
   apis: []
 }));
@@ -50,7 +50,7 @@ app.use(swagger.init(app, {
 
 
 //Includes routes files...
-app.use('/api', routes);
+app.use('/bibliohelp', routes);
 
 
 //Error Handler...
