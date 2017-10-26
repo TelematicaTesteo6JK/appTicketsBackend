@@ -13,20 +13,20 @@ const validator = require('validator');
 
 /**
  * @swagger
- * path: /api/origenes
+ * path: /api/usuarios
  * operations:
  *   -  httpMethod: GET
- *      summary: Devuelve la lista de los origenes.
- *      notes: Devuelve la lista de origenes.
- *      responseClass: Origenes
- *      nickname: Origenes
+ *      summary: Devuelve la lista de todos los usuarios
+ *      notes: Devuelve la lista de los usuarios
+ *      responseClass: Usuarios
+ *      nickname: Usuarios
  *      consumes: 
  *        - text/html
  */
 
 routes.get('/', function(req, res, next){  
     Promise.using(mysql(), function(connection) {
-        return connection.query("SELECT nombre AS nombreOrigen, usuario, descripcion FROM origenes WHERE activo = 1").then(function(rows) {
+        return connection.query("SELECT CONCAT(u.nombre, '', apellidos) AS nombreUsuario, p.Nombre, email AS correo FROM usuario u INNER JOIN plantel p WHERE u.plantel_id = p.plantel_id").then(function(rows) {
             res.send({status: true, data : rows}).status(200);
         }).catch(function(error) {
             res.send({status: false, data : error}).status(500);
@@ -36,7 +36,7 @@ routes.get('/', function(req, res, next){
 
 /**
  * @swagger
- * path: /api/codigoPostal
+ * path: /api/usuarios
  * operations:
  *   -  httpMethod: GET
  *      summary: Devuelve la lista de códigos los origenes
@@ -54,11 +54,11 @@ routes.get('/', function(req, res, next){
  */
 
  routes.get('/:id', function(req, res, next){  
-    let idOrigen = req.params.id;
+    let idUsuario = req.params.id;
     
-    if(!validator.isEmpty(idOrigen) && validator.isInt(idOrigen)){
+    if(!validator.isEmpty(idUsuario) && idUsuario != undefined && validator.isInt(idUsuario)){
         Promise.using(mysql(), function(connection) {
-            return connection.query("SELECT nombre AS nombreOrigen, usuario, descripcion FROM origenes WHERE id ='"+idOrigen+"' AND activo = 1").then(function(rows) {
+            return connection.query("SELECT CONCAT(u.nombre, '', apellidos) AS nombreUsuario, p.Nombre, email AS correo FROM usuario u INNER JOIN plantel p WHERE u.plantel_id = p.plantel_id AND u.usuario_id = '"+idUsuario+"'").then(function(rows) {
                 res.send({status: true, data : rows}).status(200);
             }).catch(function(error) {
                 res.send({status: false, data : error}).status(500);
