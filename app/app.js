@@ -16,11 +16,11 @@ app.use(bodyParser.json());
 
 //Conecction to MongoDB Server...
 //mongoose.connect('mongodb://localhost:27017/gestores?authSource=admin', { useMongoClient: true });
-mongoose.connect('mongodb://root:m0ng0@ec2-52-25-124-150.us-west-2.compute.amazonaws.com:27017/gestores?authSource=admin', { useMongoClient: true });
-mongoose.Promise = global.Promise;
-mongoose.connection.on('error', function(err){
-  logger.error(err);
-});
+// mongoose.connect('mongodb://root:m0ng0@ec2-52-25-124-150.us-west-2.compute.amazonaws.com:27017/gestores?authSource=admin', { useMongoClient: true });
+// mongoose.Promise = global.Promise;
+// mongoose.connection.on('error', function(err){
+//   logger.error(err);
+// });
 
 
 //CORS Origin..
@@ -39,25 +39,18 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(swagger.init(app, {
   apiVersion: '1.0',
   swaggerVersion: '1.0',
-  basePath: 'http://ec2-52-25-124-150.us-west-2.compute.amazonaws.com:8080',
+  basePath: 'http://localhost:8080',
   swaggerURL: '/docs',
-  swaggerJSON: '/api-docs.json',
+  swaggerJSON: '/bibliohelp-docs.json',
   swaggerUI: './public/swagger/',
-  apis: ['./routes/ninjas/index.js', 
-          './routes/estados/index.js',
-          './routes/municipios/index.js', 
-          './routes/origenes/index.js',
-          './routes/eventos/index.js',
-          './routes/codigoPostal/index.js',
-          './routes/encuestas/index.js',
-          './routes/login/index.js']
+  apis: ['./routes/usuarios/index.js',]
 }));
 
 
 
 
 //Includes routes files...
-app.use('/api', routes);
+app.use('/bibliohelp', routes);
 
 
 //Error Handler...

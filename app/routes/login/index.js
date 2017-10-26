@@ -36,11 +36,12 @@ const md5 = require('md5');
 
 routes.get('/', function(req, res, next){
 
-    let username = req.query.username;
-    let password = req.query.password; 
+    // let username = req.query.username;
+    // let password = req.query.password; 
 
     Promise.using(mysql(), function(connection) {
-        return connection.query('SELECT id FROM usuarios u INNER JOIN uruarios_roles ur WHERE u.id = ur.usuario AND u.username = "'+username+'" AND u.password = "'+password+'" AND ur.rol = 1').then(function(rows) {  
+        return connection.query('SELECT * FROM tipo_usuario').then(function(rows) { 
+            console.log(Object.keys(rows).length); 
             if(Object.keys(rows).length == 1)
             res.send({status: true, data : rows}).status(200);
             else
