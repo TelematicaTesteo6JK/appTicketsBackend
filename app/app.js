@@ -43,7 +43,7 @@ app.use(swagger.init(app, {
   swaggerURL: '/docs',
   swaggerJSON: '/bibliohelp-docs.json',
   swaggerUI: './public/swagger/',
-  apis: []
+  apis: ['./routes/usuarios/index.js',]
 }));
 
 

@@ -1,6 +1,6 @@
 /**
  * @swagger
- * resourcePath: /usuarios
+ * resourcePath: /tiposUsuario
  * description: API Gestor de Elecciones
  */
 
@@ -13,7 +13,7 @@ const validator = require('validator');
 
 /**
  * @swagger
- * path: /bibliohelp/usuarios
+ * path: /bibliohelp/tiposUsuario
  * operations:
  *   -  httpMethod: GET
  *      summary: Devuelve la lista de todos los usuarios
@@ -197,7 +197,7 @@ routes.delete('/:id', function(req, res, next){
 /**
  * @swagger
  * models:
- *   usuarios:
+ *   tiposUsuarios:
 
  *     properties:
  *       id:
