@@ -16,6 +16,7 @@
     "md5": "^2.2.1",
     "mongoose": "^4.11.13",
     "mysql": "^2.15.0",
+    "node-datetime": "^2.0.3",
     "promise-mysql": "^3.1.0",
     "pug": "^2.0.0-rc.4",
     "togeojson": "^0.16.0",
