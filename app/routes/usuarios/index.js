@@ -26,7 +26,7 @@ const validator = require('validator');
 
 routes.get('/', function(req, res, next){  
     Promise.using(mysql(), function(connection) {
-        return connection.query("SELECT CONCAT(u.nombre, ' ', apellidos) AS nombreUsuario, p.Nombre, email AS correo FROM usuario u INNER JOIN plantel p WHERE u.plantel_id = p.plantel_id").then(function(rows) {
+        return connection.query("SELECT u.usuario_id, u.nombre, u.apellidos, p.Nombre, email AS correo FROM usuario u INNER JOIN plantel p WHERE u.plantel_id = p.plantel_id").then(function(rows) {
             res.send({status: true, data : rows}).status(200);
         }).catch(function(error) {
             res.send({status: false, data : error}).status(500);
