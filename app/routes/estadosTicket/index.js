@@ -13,7 +13,7 @@ const validator = require('validator');
 
 /**
  * @swagger
- * path: /bibliohelp/planteles
+ * path: /bibliohelp/estadosTicket
  * operations:
  *   -  httpMethod: GET
  *      summary: Devuelve la lista de todos los planteles
@@ -26,7 +26,7 @@ const validator = require('validator');
 
 routes.get('/', function(req, res, next){  
     Promise.using(mysql(), function(connection) {
-        return connection.query("SELECT id AS idPlantel, nombre FROM plantel").then(function(rows) {
+        return connection.query("SELECT estado_ticket_id AS idEstado, nombre FROM estado_ticket").then(function(rows) {
             res.send({status: true, data : rows}).status(200);
         }).catch(function(error) {
             res.send({status: false, data : error}).status(500);

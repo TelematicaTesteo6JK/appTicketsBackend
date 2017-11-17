@@ -26,7 +26,7 @@ const validator = require('validator');
 
 routes.get('/', function(req, res, next){  
     Promise.using(mysql(), function(connection) {
-        return connection.query("SELECT CONCAT(u.nombre, ' ', apellidos) AS nombreUsuario, p.Nombre, email AS correo FROM usuario u INNER JOIN plantel p WHERE u.plantel_id = p.plantel_id").then(function(rows) {
+        return connection.query("SELECT u.usuario_id, u.nombre, u.apellidos, p.Nombre, email AS correo FROM usuario u INNER JOIN plantel p WHERE u.plantel_id = p.plantel_id").then(function(rows) {
             res.send({status: true, data : rows}).status(200);
         }).catch(function(error) {
             res.send({status: false, data : error}).status(500);
@@ -166,13 +166,23 @@ routes.post('/', function(req, res, next){
     let plantel_id = req.body.plantel_id;
     let tipoUsuario = req.body.tipo_usuario;
 
-        Promise.using(mysql(), function(connection) {
-            return connection.query("INSERT INTO usuario (nombre,apellidos,password,email,plantel_id,tipo_usuario_id) VALUES ('"+nombre+"','"+apellidos+"','"+password+"','"+email+"','"+plantel_id+"','"+tipoUsuario+"')").then(function(rows) {
-            res.send({status: true, data : {"mensaje" : "Registro agregado correctamente."}}).status(200);
-            }).catch(function(error) {
-                res.send({status: false, data : error}).status(500);
-            });
+    Promise.using(mysql(), function (connection) {
+        return connection.query("SELECT usuario_id FROM usuario WHERE email = '" + username + "'").then(function (rows) {
+            if (Object.keys(rows).length == 1)
+                res.send({ status: false, data: { "mensaje": "Ya se han registrado con éste email" } }).status(200);
+            else{
+                Promise.using(mysql(), function (connection) {
+                    return connection.query("INSERT INTO usuario (nombre,apellidos,password,email,plantel_id,tipo_usuario_id) VALUES ('" + nombre + "','" + apellidos + "','" + password + "','" + email + "','" + plantel_id + "','" + tipoUsuario + "')").then(function (rows) {
+                        res.send({ status: true, data: { "mensaje": "Registro agregado correctamente." } }).status(200);
+                    }).catch(function (error) {
+                        res.send({ status: false, data: error }).status(500);
+                    });
+                });
+            }
+        }).catch(function (error) {
+            res.send({ status: false, data: error }).status(500);
         });
+    });
 });
 
 

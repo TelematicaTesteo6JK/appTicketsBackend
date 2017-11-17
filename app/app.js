@@ -7,6 +7,7 @@ const swagger = require('../');
 const logger = require('logger').createLogger('./logs/development.log'); 
 const validator = require('validator');
 const md5 = require('md5');
+const datetime = require('node-datetime');
 
 const app = express();
 
@@ -39,7 +40,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(swagger.init(app, {
   apiVersion: '1.0',
   swaggerVersion: '1.0',
-  basePath: 'http://localhost:8080',
+  basePath: 'http://localhost:3000',
   swaggerURL: '/docs',
   swaggerJSON: '/bibliohelp-docs.json',
   swaggerUI: './public/swagger/',
