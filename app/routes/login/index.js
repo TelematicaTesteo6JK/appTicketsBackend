@@ -34,10 +34,11 @@ const md5 = require('md5');
  *      description: Contraseña tipo MD5.
  */
 routes.get('/', function (req, res, next) {
-    let idEncargado = req.params.idEncargado;
-    if (!idUsuario != undefined && validator.isInt(idEncargado)) {
+    let username = req.query.params;
+    let password = req.query.params;
+
         Promise.using(mysql(), function (connection) {
-            return connection.query("SELECT usuario_id FROM usuario email = '" + username + "' AND password = '" + password + "'").then(function (rows) {
+            return connection.query("SELECT usuario_id FROM usuario WHERE email = '" + username + "' AND password = '" + password + "'").then(function (rows) {
                 if (Object.keys(rows).length == 1)
                     res.send({ status: true, data: rows }).status(200);
                 else
@@ -45,11 +46,7 @@ routes.get('/', function (req, res, next) {
                 }).catch(function (error) {
                     res.send({ status: false, data: error }).status(500);
                 });
-        });
-    }
-    else {
-        res.status(400).send('Bad Request');
-    }
+        });   
 });
 
 
