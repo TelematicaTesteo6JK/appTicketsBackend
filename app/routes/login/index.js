@@ -33,24 +33,25 @@ const md5 = require('md5');
  *      required: true
  *      description: Contraseña tipo MD5.
  */
-
-routes.get('/', function(req, res, next){
-
-    // let username = req.query.username;
-    // let password = req.query.password; 
-
-    Promise.using(mysql(), function(connection) {
-        return connection.query('SELECT * FROM tipo_usuario').then(function(rows) { 
-            console.log(Object.keys(rows).length); 
-            if(Object.keys(rows).length == 1)
-            res.send({status: true, data : rows}).status(200);
-            else
-            res.send({status: false, data : { "mensaje": "No autorizado"}}).status(200);
-        }).catch(function(error) {
-            res.send({status: false, data : error}).status(500);
+routes.get('/', function (req, res, next) {
+    let idEncargado = req.params.idEncargado;
+    if (!idUsuario != undefined && validator.isInt(idEncargado)) {
+        Promise.using(mysql(), function (connection) {
+            return connection.query("SELECT usuario_id FROM usuario email = '" + username + "' AND password = '" + password + "'").then(function (rows) {
+                if (Object.keys(rows).length == 1)
+                    res.send({ status: true, data: rows }).status(200);
+                else
+                    return res.send({ status: false, data: { "mensaje": "Accesso no autorizado" } }).status(200);
+                }).catch(function (error) {
+                    res.send({ status: false, data: error }).status(500);
+                });
         });
-    });
-})
+    }
+    else {
+        res.status(400).send('Bad Request');
+    }
+});
+
 
 /**
  * @swagger
